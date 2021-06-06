@@ -46,8 +46,8 @@ func (e FizzEnv) SanitizeCrypto()  {
 	}
 }
 
-func New() FizzEnv {
-	res := FizzEnv{
+func New() *FizzEnv {
+	res := &FizzEnv{
 		Crypto: envCrypto{
 			PortSvcCrypto:    os.Getenv("FIZZ_PORT_SVC_CRYPTO"),
 			JwtKey:           os.Getenv("FIZZ_JWT_KEY"),
