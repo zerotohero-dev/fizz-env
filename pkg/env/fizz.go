@@ -40,11 +40,7 @@ func sanitizeCommon(e FizzEnv) {
 	}
 }
 
-func (e FizzEnv) SanitizeCrypto() {
-	sanitizeCommon(e)
-
-	v := reflect.ValueOf(e.Crypto)
-
+func sanitize(v reflect.Value) {
 	for i := 0; i < v.NumField(); i++ {
 		val := v.Field(i).String()
 		name := v.Type().Field(i).Name
@@ -57,6 +53,14 @@ func (e FizzEnv) SanitizeCrypto() {
 			)
 		}
 	}
+}
+
+func (e FizzEnv) SanitizeCrypto() {
+	sanitize(reflect.ValueOf(e.Crypto))
+}
+
+func (e FizzEnv) SanitizeLog() {
+	sanitize(reflect.ValueOf(e.Log))
 }
 
 func New() *FizzEnv {
