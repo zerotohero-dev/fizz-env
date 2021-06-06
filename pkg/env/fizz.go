@@ -25,11 +25,24 @@ type envCrypto struct {
 	AesPassphrase    string
 }
 
-type FizzEnv struct {
-	Crypto envCrypto
+type envLogging struct {
+	Destination string
 }
 
-func (e FizzEnv) SanitizeCrypto()  {
+type FizzEnv struct {
+	Crypto envCrypto
+	Log    envLogging
+}
+
+func sanitizeCommon(e FizzEnv) {
+	if e.Log.Destination == "" {
+		panic("the environment variable FIZZ_LOG_DESTINATION is not defined")
+	}
+}
+
+func (e FizzEnv) SanitizeCrypto() {
+	sanitizeCommon(e)
+
 	v := reflect.ValueOf(e.Crypto)
 
 	for i := 0; i < v.NumField(); i++ {
@@ -54,6 +67,9 @@ func New() *FizzEnv {
 			RandomByteLength: os.Getenv("FIZZ_RANDOM_BYTE_LENGTH"),
 			BcryptHashRounds: os.Getenv("FIZZ_BCRYPT_HASH_ROUNDS"),
 			AesPassphrase:    os.Getenv("FIZZ_AES_PASSPHRASE"),
+		},
+		Log: envLogging{
+			Destination: os.Getenv("FIZZ_LOG_DESTINATION"),
 		},
 	}
 
