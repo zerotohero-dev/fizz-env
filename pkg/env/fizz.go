@@ -58,10 +58,22 @@ func (e FizzEnv) SanitizeCrypto() {
 }
 
 func (e FizzEnv) SanitizeLog() {
+	// Since the field assumes a default value, we need to explicitly check
+	// the existence of this underlying environment variable.
+	if os.Getenv("FIZZ_LOG_USE_STD_OUT") == "" {
+		panic(
+			fmt.Sprintf(
+				"The environment variable that corresponds to "+
+					"'%s.%s' is not defined.", "envLogging", "UseStdOut",
+			),
+		)
+	}
+
 	sanitize(reflect.ValueOf(e.Log))
 }
 
 func New() *FizzEnv {
+
 	res := &FizzEnv{
 		Crypto: envCrypto{
 			PortSvcCrypto:    os.Getenv("FIZZ_PORT_SVC_CRYPTO"),
