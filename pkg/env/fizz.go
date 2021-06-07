@@ -15,6 +15,7 @@ import (
 	"fmt"
 	"os"
 	"reflect"
+	"strings"
 )
 
 type envCrypto struct {
@@ -27,17 +28,12 @@ type envCrypto struct {
 
 type envLogging struct {
 	Destination string
+	UseStdOut   bool
 }
 
 type FizzEnv struct {
 	Crypto envCrypto
 	Log    envLogging
-}
-
-func sanitizeCommon(e FizzEnv) {
-	if e.Log.Destination == "" {
-		panic("the environment variable FIZZ_LOG_DESTINATION is not defined")
-	}
 }
 
 func sanitize(v reflect.Value) {
@@ -74,6 +70,8 @@ func New() *FizzEnv {
 		},
 		Log: envLogging{
 			Destination: os.Getenv("FIZZ_LOG_DESTINATION"),
+			UseStdOut: strings.ToLower(os.Getenv("FIZZ_LOG_USE_STD_OUT")) == "true" ||
+				strings.ToLower(os.Getenv("FIZZ_LOG_USE_STD_OUT")) == "yes",
 		},
 	}
 
