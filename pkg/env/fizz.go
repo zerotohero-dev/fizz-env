@@ -39,12 +39,14 @@ type FizzEnv struct {
 func sanitize(v reflect.Value) {
 	for i := 0; i < v.NumField(); i++ {
 		val := v.Field(i).String()
-		name := v.Type().Field(i).Name
+		objName := v.Type().Name()
+		fieldName := v.Type().Field(i).Name
 
 		if val == "" {
 			panic(
 				fmt.Sprintf(
-					"The environment variable that corresponds to '%s' is not defined.", name,
+					"The environment variable that corresponds to "+
+						"'%s.%s' is not defined.", objName, fieldName,
 				),
 			)
 		}
