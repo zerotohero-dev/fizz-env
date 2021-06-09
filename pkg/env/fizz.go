@@ -29,11 +29,7 @@ type envCrypto struct {
 
 type envLogging struct {
 	Destination string
-	UseStdOut   bool
 }
-
-const ProductionDeploymentType = "production"
-const DevelopmentDeploymentType = "development"
 
 type DeploymentType string
 
@@ -115,8 +111,6 @@ func New() *FizzEnv {
 		},
 		Log: envLogging{
 			Destination: os.Getenv("FIZZ_LOG_DESTINATION"),
-			UseStdOut: strings.ToLower(os.Getenv("FIZZ_LOG_USE_STD_OUT")) == "true" ||
-				strings.ToLower(os.Getenv("FIZZ_LOG_USE_STD_OUT")) == "yes",
 		},
 		Deployment: envDeployment{Type: deploymentType},
 	}
