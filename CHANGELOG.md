@@ -18,6 +18,10 @@
 commit d4dbe748b455431b5077447b0f099cc0bf143d01 (HEAD -> main, tag: v0.1.4, origin/main)
 ```
 
-# v0.1.5
+# v0.1.7
+
+* Added Honeybadger API key.
+
+# v0.1.6
 
 * Clarified error messages.

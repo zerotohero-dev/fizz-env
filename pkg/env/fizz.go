@@ -19,11 +19,12 @@ import (
 )
 
 type envCrypto struct {
-	PortSvcCrypto    string
-	JwtKey           string
-	RandomByteLength string
-	BcryptHashRounds string
-	AesPassphrase    string
+	PortSvcCrypto     string
+	JwtKey            string
+	RandomByteLength  string
+	BcryptHashRounds  string
+	AesPassphrase     string
+	HoneybadgerApiKey string
 }
 
 type envLogging struct {
@@ -76,11 +77,12 @@ func New() *FizzEnv {
 
 	res := &FizzEnv{
 		Crypto: envCrypto{
-			PortSvcCrypto:    os.Getenv("FIZZ_PORT_SVC_CRYPTO"),
-			JwtKey:           os.Getenv("FIZZ_JWT_KEY"),
-			RandomByteLength: os.Getenv("FIZZ_RANDOM_BYTE_LENGTH"),
-			BcryptHashRounds: os.Getenv("FIZZ_BCRYPT_HASH_ROUNDS"),
-			AesPassphrase:    os.Getenv("FIZZ_AES_PASSPHRASE"),
+			PortSvcCrypto:     os.Getenv("FIZZ_CRYPTO_PORT_SVC_CRYPTO"),
+			JwtKey:            os.Getenv("FIZZ_CRYPTO_JWT_KEY"),
+			RandomByteLength:  os.Getenv("FIZZ_CRYPTO_RANDOM_BYTE_LENGTH"),
+			BcryptHashRounds:  os.Getenv("FIZZ_CRYPTO_BCRYPT_HASH_ROUNDS"),
+			AesPassphrase:     os.Getenv("FIZZ_CRYPTO_AES_PASSPHRASE"),
+			HoneybadgerApiKey: os.Getenv("FIZZ_CRYPTO_HONEYBADGER_API_KEY"),
 		},
 		Log: envLogging{
 			Destination: os.Getenv("FIZZ_LOG_DESTINATION"),
