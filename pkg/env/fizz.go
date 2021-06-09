@@ -32,9 +32,23 @@ type envLogging struct {
 	UseStdOut   bool
 }
 
+const ProductionDeploymentType = "production"
+const DevelopmentDeploymentType = "development"
+
+type DeploymentType string
+
+const Production DeploymentType = "production"
+const Development DeploymentType = "development"
+const Staging DeploymentType = "staging"
+
+type envDeployment struct {
+	Type DeploymentType
+}
+
 type FizzEnv struct {
-	Crypto envCrypto
-	Log    envLogging
+	Crypto     envCrypto
+	Log        envLogging
+	Deployment envDeployment
 }
 
 func sanitize(v reflect.Value) {
@@ -73,7 +87,22 @@ func (e FizzEnv) SanitizeLog() {
 	sanitize(reflect.ValueOf(e.Log))
 }
 
+func deploymentTypeFromEnv(val string) DeploymentType {
+	if strings.ToLower(val) == string(Production) {
+		return Production
+	}
+	if strings.ToLower(val) == string(Staging) {
+		return Staging
+	}
+	if strings.ToLower(val) == string(Development) {
+		return Development
+	}
+	panic("FIZZ_DEPLOYMENT_TYPE must be a value " +
+		"from {'production','staging','development'}.")
+}
+
 func New() *FizzEnv {
+	deploymentType := deploymentTypeFromEnv(os.Getenv("FIZZ_DEPLOYMENT_TYPE"))
 
 	res := &FizzEnv{
 		Crypto: envCrypto{
@@ -89,6 +118,7 @@ func New() *FizzEnv {
 			UseStdOut: strings.ToLower(os.Getenv("FIZZ_LOG_USE_STD_OUT")) == "true" ||
 				strings.ToLower(os.Getenv("FIZZ_LOG_USE_STD_OUT")) == "yes",
 		},
+		Deployment: envDeployment{Type: deploymentType},
 	}
 
 	return res
