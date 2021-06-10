@@ -72,6 +72,10 @@ func (e FizzEnv) SanitizeLog() {
 	sanitize(reflect.ValueOf(e.Log))
 }
 
+func (e FizzEnv) IsDevelopment() bool {
+	return e.Deployment.Type == Development
+}
+
 func deploymentTypeFromEnv(val string) DeploymentType {
 	if strings.ToLower(val) == string(Production) {
 		return Production
