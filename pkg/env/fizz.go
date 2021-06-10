@@ -102,7 +102,7 @@ func New() *FizzEnv {
 
 	res := &FizzEnv{
 		Crypto: envCrypto{
-			Port:              os.Getenv("FIZZ_CRYPTO_PORT_SVC_CRYPTO"),
+			Port:              os.Getenv("FIZZ_CRYPTO_SVC_PORT"),
 			JwtKey:            os.Getenv("FIZZ_CRYPTO_JWT_KEY"),
 			RandomByteLength:  os.Getenv("FIZZ_CRYPTO_RANDOM_BYTE_LENGTH"),
 			BcryptHashRounds:  os.Getenv("FIZZ_CRYPTO_BCRYPT_HASH_ROUNDS"),
