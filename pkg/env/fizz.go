@@ -15,14 +15,16 @@ import (
 	"fmt"
 	"os"
 	"reflect"
+	"strconv"
 	"strings"
 )
 
 type envCrypto struct {
 	Port              string
 	JwtKey            string
+	JwtExpiryHours    int
 	RandomByteLength  string
-	BcryptHashRounds  string
+	BcryptHashRounds  int
 	AesPassphrase     string
 	HoneybadgerApiKey string
 }
@@ -53,7 +55,11 @@ func sanitize(v reflect.Value) {
 		objName := v.Type().Name()
 		fieldName := v.Type().Field(i).Name
 
-		if val == "" {
+		// Most of the environment settings are string, but some of them are
+		// numeric too. For the numeric environment settings, if the associated
+		// environment variable is not set, it will be parsed as `0`. The
+		// `val == "0"` check takes that case into account.
+		if val == "" || val == "0" {
 			panic(
 				fmt.Sprintf(
 					"The environment variable that corresponds to "+
@@ -93,12 +99,25 @@ func deploymentTypeFromEnv(val string) DeploymentType {
 func New() *FizzEnv {
 	deploymentType := deploymentTypeFromEnv(os.Getenv("FIZZ_DEPLOYMENT_TYPE"))
 
+	jwtExpiryHours := os.Getenv("FIZZ_CRYPTO_JWT_EXPIRY_HOURS")
+	jwtExpiryHoursNum := 0
+	if jwtExpiryHours != "" {
+		jwtExpiryHoursNum, _ = strconv.Atoi(jwtExpiryHours)
+	}
+
+	bcryptHashRounds := os.Getenv("FIZZ_CRYPTO_BCRYPT_HASH_ROUNDS")
+	bcryptHashRoundsNum := 0
+	if bcryptHashRounds != "" {
+		bcryptHashRoundsNum, _ = strconv.Atoi(bcryptHashRounds)
+	}
+
 	res := &FizzEnv{
 		Crypto: envCrypto{
 			Port:              os.Getenv("FIZZ_CRYPTO_SVC_PORT"),
 			JwtKey:            os.Getenv("FIZZ_CRYPTO_JWT_KEY"),
+			JwtExpiryHours:    jwtExpiryHoursNum,
 			RandomByteLength:  os.Getenv("FIZZ_CRYPTO_RANDOM_BYTE_LENGTH"),
-			BcryptHashRounds:  os.Getenv("FIZZ_CRYPTO_BCRYPT_HASH_ROUNDS"),
+			BcryptHashRounds:  bcryptHashRoundsNum,
 			AesPassphrase:     os.Getenv("FIZZ_CRYPTO_AES_PASSPHRASE"),
 			HoneybadgerApiKey: os.Getenv("FIZZ_CRYPTO_HONEYBADGER_API_KEY"),
 		},
