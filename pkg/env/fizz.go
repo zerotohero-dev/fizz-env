@@ -17,12 +17,13 @@ import (
 	"reflect"
 	"strconv"
 	"strings"
+	"time"
 )
 
 type envCrypto struct {
 	Port              string
 	JwtKey            string
-	JwtExpiryHours    int
+	JwtExpiryHours    time.Duration
 	RandomByteLength  string
 	BcryptHashRounds  int
 	AesPassphrase     string
@@ -115,7 +116,7 @@ func New() *FizzEnv {
 		Crypto: envCrypto{
 			Port:              os.Getenv("FIZZ_CRYPTO_SVC_PORT"),
 			JwtKey:            os.Getenv("FIZZ_CRYPTO_JWT_KEY"),
-			JwtExpiryHours:    jwtExpiryHoursNum,
+			JwtExpiryHours:    time.Duration(jwtExpiryHoursNum),
 			RandomByteLength:  os.Getenv("FIZZ_CRYPTO_RANDOM_BYTE_LENGTH"),
 			BcryptHashRounds:  bcryptHashRoundsNum,
 			AesPassphrase:     os.Getenv("FIZZ_CRYPTO_AES_PASSPHRASE"),
