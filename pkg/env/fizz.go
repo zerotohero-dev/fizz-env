@@ -52,15 +52,34 @@ type FizzEnv struct {
 
 func sanitize(v reflect.Value) {
 	for i := 0; i < v.NumField(); i++ {
-		val := v.Field(i).String()
+		typeName := v.Field(i).Type().Name()
+
+		if typeName == "string" {
+			val := v.Field(i).String()
+			objName := v.Type().Name()
+			fieldName := v.Type().Field(i).Name
+
+			if val == "" {
+				panic(
+					fmt.Sprintf(
+						"The environment variable that corresponds to "+
+							"'%s.%s' is not defined.", objName, fieldName,
+					),
+				)
+			}
+
+			continue
+		}
+
+		if typeName == "bool" {
+			continue
+		}
+
+		val := v.Field(i).Int()
 		objName := v.Type().Name()
 		fieldName := v.Type().Field(i).Name
 
-		// Most of the environment settings are string, but some of them are
-		// numeric too. For the numeric environment settings, if the associated
-		// environment variable is not set, it will be parsed as `0`. The
-		// `val == "0"` check takes that case into account.
-		if val == "" || val == "0" {
+		if val == 0 {
 			panic(
 				fmt.Sprintf(
 					"The environment variable that corresponds to "+
