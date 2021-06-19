@@ -30,8 +30,16 @@ type envCrypto struct {
 	HoneybadgerApiKey string
 }
 
+func (e envCrypto) Sanitize() {
+	sanitize(reflect.ValueOf(e))
+}
+
 type envLogging struct {
 	Destination string
+}
+
+func (e envLogging) Sanitize() {
+	sanitize(reflect.ValueOf(e))
 }
 
 type DeploymentType string
@@ -88,14 +96,6 @@ func sanitize(v reflect.Value) {
 			)
 		}
 	}
-}
-
-func (e FizzEnv) SanitizeCrypto() {
-	sanitize(reflect.ValueOf(e.Crypto))
-}
-
-func (e FizzEnv) SanitizeLog() {
-	sanitize(reflect.ValueOf(e.Log))
 }
 
 func (e FizzEnv) IsDevelopment() bool {
