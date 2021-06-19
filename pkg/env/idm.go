@@ -21,10 +21,11 @@ type idmDeps struct {
 }
 
 type idmEnv struct {
-	Port           string
-	UsersTableName string
-	VerifiedUrl    string
-	Dependencies   idmDeps
+	Port              string
+	UsersTableName    string
+	VerifiedUrl       string
+	HoneybadgerApiKey string
+	Dependencies      idmDeps
 }
 
 func (e idmEnv) Sanitize() {
@@ -35,9 +36,10 @@ func (e idmEnv) Sanitize() {
 
 func newIdmEnv(deps idmDeps) *idmEnv {
 	return &idmEnv{
-		Port:           os.Getenv("FIZZ_IDM_SVC_PORT"),
-		UsersTableName: os.Getenv("FIZZ_IDM_USERS_TABLE_NAME"),
-		VerifiedUrl:    os.Getenv("FIZZ_IDM_VERIFIED_URL"),
-		Dependencies:   deps,
+		Port:              os.Getenv("FIZZ_IDM_SVC_PORT"),
+		UsersTableName:    os.Getenv("FIZZ_IDM_USERS_TABLE_NAME"),
+		VerifiedUrl:       os.Getenv("FIZZ_IDM_VERIFIED_URL"),
+		HoneybadgerApiKey: os.Getenv("FIZZ_IDM_HONEYBADGER_API_KEY"),
+		Dependencies:      deps,
 	}
 }
