@@ -22,7 +22,7 @@ type cryptoEnv struct {
 	Port              string
 	JwtKey            string
 	JwtExpiryHours    time.Duration
-	RandomByteLength  string
+	RandomByteLength  int
 	BcryptHashRounds  int
 	AesPassphrase     string
 	HoneybadgerApiKey string
@@ -45,11 +45,17 @@ func newCryptoEnv() *cryptoEnv {
 		bcryptHashRoundsNum, _ = strconv.Atoi(bcryptHashRounds)
 	}
 
+	randomByteLength := os.Getenv("FIZZ_CRYPTO_RANDOM_BYTE_LENGTH")
+	randomByteLengthNum := 0
+	if randomByteLength != "" {
+		randomByteLengthNum, _ = strconv.Atoi(randomByteLength)
+	}
+
 	return &cryptoEnv{
 		Port:              os.Getenv("FIZZ_CRYPTO_SVC_PORT"),
 		JwtKey:            os.Getenv("FIZZ_CRYPTO_JWT_KEY"),
 		JwtExpiryHours:    time.Duration(jwtExpiryHoursNum),
-		RandomByteLength:  os.Getenv("FIZZ_CRYPTO_RANDOM_BYTE_LENGTH"),
+		RandomByteLength:  randomByteLengthNum,
 		BcryptHashRounds:  bcryptHashRoundsNum,
 		AesPassphrase:     os.Getenv("FIZZ_CRYPTO_AES_PASSPHRASE"),
 		HoneybadgerApiKey: os.Getenv("FIZZ_CRYPTO_HONEYBADGER_API_KEY"),

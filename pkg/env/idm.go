@@ -31,7 +31,21 @@ type idmEnv struct {
 func (e idmEnv) Sanitize() {
 	sanitize(reflect.ValueOf(e))
 	// IDM depends on crypto, so sanitize it too.
-	sanitize(reflect.ValueOf(e.Dependencies.Crypto))
+
+	// TODO: this looks smelly. But it’s reflection after all. Maybe reconsider?
+	// I’d prefer to manually type a bunch of key instead of the code
+	// becoming even more cryptic.
+	ce := cryptoEnv{
+		Port:              e.Dependencies.Crypto.Port,
+		JwtKey:            e.Dependencies.Crypto.JwtKey,
+		JwtExpiryHours:    e.Dependencies.Crypto.JwtExpiryHours,
+		RandomByteLength:  e.Dependencies.Crypto.RandomByteLength,
+		BcryptHashRounds:  e.Dependencies.Crypto.BcryptHashRounds,
+		AesPassphrase:     e.Dependencies.Crypto.AesPassphrase,
+		HoneybadgerApiKey: e.Dependencies.Crypto.HoneybadgerApiKey,
+	}
+
+	sanitize(reflect.ValueOf(ce))
 }
 
 func newIdmEnv(deps idmDeps) *idmEnv {
