@@ -23,11 +23,10 @@ func (e FizzEnv) IsDevelopment() bool {
 }
 
 func New() *FizzEnv {
-	cEnv := newCryptoEnv()
 	return &FizzEnv{
-		Crypto:     *cEnv,
+		Crypto:     *newCryptoEnv(),
 		Log:        *newLoggingEnv(),
 		Deployment: *newDeploymentEnv(),
-		Idm:        *newIdmEnv(idmDeps{Crypto: cEnv}),
+		Idm:        *newIdmEnv(),
 	}
 }
