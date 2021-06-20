@@ -20,6 +20,11 @@ func sanitize(v reflect.Value) {
 	for i := 0; i < v.NumField(); i++ {
 		typeName := v.Field(i).Type().Name()
 
+		// No need to check composite types.
+		if v.Field(i).Type().Kind() == reflect.Struct {
+			continue
+		}
+
 		if typeName == "string" {
 			val := v.Field(i).String()
 			objName := v.Type().Name()
