@@ -18,9 +18,9 @@ import (
 
 type idmEnv struct {
 	Port              string
+	HoneybadgerApiKey string
 	UsersTableName    string
 	VerifiedUrl       string
-	HoneybadgerApiKey string
 	CryptoEndpointUrl string
 }
 

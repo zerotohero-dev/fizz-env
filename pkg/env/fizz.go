@@ -16,6 +16,10 @@ type FizzEnv struct {
 	Log        loggingEnv
 	Deployment deploymentEnv
 	Idm        idmEnv
+	Mailer     mailerEnv
+	Notes      notesEnv
+	Questions  questionsEnv
+	Store      storeEnv
 }
 
 func (e FizzEnv) IsDevelopment() bool {
@@ -28,5 +32,9 @@ func New() *FizzEnv {
 		Log:        *newLoggingEnv(),
 		Deployment: *newDeploymentEnv(),
 		Idm:        *newIdmEnv(),
+		Mailer:     *newMailerEnv(),
+		Notes:      *newNotesEnv(),
+		Questions:  *newQuestionsEnv(),
+		Store:      *newStoreEnv(),
 	}
 }

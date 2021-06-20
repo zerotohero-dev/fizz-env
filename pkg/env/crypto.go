@@ -20,12 +20,12 @@ import (
 
 type cryptoEnv struct {
 	Port              string
+	HoneybadgerApiKey string
 	JwtKey            string
 	JwtExpiryHours    time.Duration
 	RandomByteLength  int
 	BcryptHashRounds  int
 	AesPassphrase     string
-	HoneybadgerApiKey string
 }
 
 func (e cryptoEnv) Sanitize() {
