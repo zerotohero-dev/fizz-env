@@ -11,7 +11,10 @@
 
 package env
 
-import "os"
+import (
+	"os"
+	"reflect"
+)
 
 type storeEnv struct {
 	Port                string
@@ -25,6 +28,10 @@ type storeEnv struct {
 	SubscribeApiUrl     string
 	SubscribeSuccessUrl string
 	SubscribeErrorUrl   string
+}
+
+func (e storeEnv) Sanitize() {
+	sanitize(reflect.ValueOf(e))
 }
 
 func newStoreEnv() *storeEnv {

@@ -11,12 +11,19 @@
 
 package env
 
-import "os"
+import (
+	"os"
+	"reflect"
+)
 
 type questionsEnv struct {
 	Port              string
 	HoneybadgerApiKey string
 	DataPath          string
+}
+
+func (e questionsEnv) Sanitize() {
+	sanitize(reflect.ValueOf(e))
 }
 
 func newQuestionsEnv() *questionsEnv {

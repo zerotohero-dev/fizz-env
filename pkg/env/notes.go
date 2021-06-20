@@ -11,12 +11,19 @@
 
 package env
 
-import "os"
+import (
+	"os"
+	"reflect"
+)
 
 type notesEnv struct {
 	Port              string
 	HoneybadgerApiKey string
 	DataPath          string
+}
+
+func (e notesEnv) Sanitize() {
+	sanitize(reflect.ValueOf(e))
 }
 
 func newNotesEnv() *notesEnv {

@@ -11,7 +11,10 @@
 
 package env
 
-import "os"
+import (
+	"os"
+	"reflect"
+)
 
 type mailerEnv struct {
 	Port                     string
@@ -20,6 +23,10 @@ type mailerEnv struct {
 	WebAppHostBaseUrl        string
 	MailgunDomain            string
 	MailgunApiKey            string
+}
+
+func (e mailerEnv) Sanitize() {
+	sanitize(reflect.ValueOf(e))
 }
 
 func newMailerEnv() *mailerEnv {
