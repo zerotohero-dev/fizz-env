@@ -48,10 +48,12 @@ func (e idmEnv) Sanitize() {
 
 func newIdmEnv() *idmEnv {
 	return &idmEnv{
-		Port:              os.Getenv("FIZZ_IDM_SVC_PORT"),
-		UsersTableName:    os.Getenv("FIZZ_IDM_USERS_TABLE_NAME"),
-		VerifiedUrl:       os.Getenv("FIZZ_IDM_VERIFIED_URL"),
-		HoneybadgerApiKey: os.Getenv("FIZZ_IDM_HONEYBADGER_API_KEY"),
-		CryptoEndpointUrl: os.Getenv("FIZZ_IDM_CRYPTO_ENDPOINT_URL"),
+		Port:               os.Getenv("FIZZ_IDM_SVC_PORT"),
+		UsersTableName:     os.Getenv("FIZZ_IDM_USERS_TABLE_NAME"),
+		VerifiedUrl:        os.Getenv("FIZZ_IDM_VERIFIED_URL"),
+		HoneybadgerApiKey:  os.Getenv("FIZZ_IDM_HONEYBADGER_API_KEY"),
+		CryptoEndpointUrl:  os.Getenv("FIZZ_IDM_CRYPTO_ENDPOINT_URL"),
+		DbName:             os.Getenv("FIZZ_IDM_DB_NAME"),
+		DbConnectionString: os.Getenv("FIZZ_IDM_DB_CONNECTION_STRING"),
 	}
 }
