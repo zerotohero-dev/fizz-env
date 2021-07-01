@@ -1,7 +1,7 @@
 /*
  *  \
  *  \\,
- *   \\\,^,.,,.                    “Zero to Hero”
+ *   \\\,^,.,,.                     Zero to Hero
  *   ,;7~((\))`;;,,               <zerotohero.dev>
  *   ,(@') ;)`))\;;',    stay up to date, be curious: learn
  *    )  . ),((  ))\;,
@@ -17,11 +17,13 @@ import (
 )
 
 type idmEnv struct {
-	Port              string
-	HoneybadgerApiKey string
-	UsersTableName    string
-	VerifiedUrl       string
-	CryptoEndpointUrl string
+	Port               string
+	HoneybadgerApiKey  string
+	DbName             string
+	DbConnectionString string
+	UsersTableName     string
+	VerifiedUrl        string
+	CryptoEndpointUrl  string
 }
 
 func (e idmEnv) Sanitize() {
