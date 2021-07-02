@@ -17,7 +17,6 @@ type FizzEnv struct {
 	Deployment deploymentEnv
 	Idm        idmEnv
 	Mailer     mailerEnv
-	Notes      notesEnv
 	Questions  questionsEnv
 	Store      storeEnv
 }
@@ -33,7 +32,6 @@ func New() *FizzEnv {
 		Deployment: *newDeploymentEnv(),
 		Idm:        *newIdmEnv(),
 		Mailer:     *newMailerEnv(),
-		Notes:      *newNotesEnv(),
 		Questions:  *newQuestionsEnv(),
 		Store:      *newStoreEnv(),
 	}
