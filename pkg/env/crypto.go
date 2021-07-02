@@ -28,9 +28,7 @@ type cryptoEnv struct {
 	AesPassphrase     string
 }
 
-func (e cryptoEnv) Sanitize() {
-	sanitize(reflect.ValueOf(e))
-}
+func (e cryptoEnv) Sanitize() { sanitize(reflect.ValueOf(e)) }
 
 func newCryptoEnv() *cryptoEnv {
 	jwtExpiryHours := os.Getenv("FIZZ_CRYPTO_JWT_EXPIRY_HOURS")

@@ -20,9 +20,7 @@ type loggingEnv struct {
 	Destination string
 }
 
-func (e loggingEnv) Sanitize() {
-	sanitize(reflect.ValueOf(e))
-}
+func (e loggingEnv) Sanitize() { sanitize(reflect.ValueOf(e)) }
 
 func newLoggingEnv() *loggingEnv {
 	return &loggingEnv{

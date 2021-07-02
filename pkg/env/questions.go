@@ -22,9 +22,7 @@ type questionsEnv struct {
 	DataPath          string
 }
 
-func (e questionsEnv) Sanitize() {
-	sanitize(reflect.ValueOf(e))
-}
+func (e questionsEnv) Sanitize() { sanitize(reflect.ValueOf(e)) }
 
 func newQuestionsEnv() *questionsEnv {
 	return &questionsEnv{

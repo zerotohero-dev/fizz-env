@@ -25,9 +25,7 @@ type mailerEnv struct {
 	MailgunApiKey            string
 }
 
-func (e mailerEnv) Sanitize() {
-	sanitize(reflect.ValueOf(e))
-}
+func (e mailerEnv) Sanitize() { sanitize(reflect.ValueOf(e)) }
 
 func newMailerEnv() *mailerEnv {
 	return &mailerEnv{

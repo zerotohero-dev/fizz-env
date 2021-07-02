@@ -30,9 +30,7 @@ type storeEnv struct {
 	SubscribeErrorUrl   string
 }
 
-func (e storeEnv) Sanitize() {
-	sanitize(reflect.ValueOf(e))
-}
+func (e storeEnv) Sanitize() { sanitize(reflect.ValueOf(e)) }
 
 func newStoreEnv() *storeEnv {
 	return &storeEnv{
