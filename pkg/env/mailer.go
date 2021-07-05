@@ -21,6 +21,7 @@ type mailerEnv struct {
 	HoneybadgerApiKey        string
 	EmailVerificationBaseUrl string
 	WebAppHostBaseUrl        string
+	PasswordResetBaseUrl     string
 	MailgunDomain            string
 	MailgunApiKey            string
 }
@@ -33,6 +34,7 @@ func newMailerEnv() *mailerEnv {
 		HoneybadgerApiKey:        os.Getenv("FIZZ_MAILER_HONEYBADGER_API_KEY"),
 		EmailVerificationBaseUrl: os.Getenv("FIZZ_MAILER_EMAIL_VERIFICATION_BASE_URL"),
 		WebAppHostBaseUrl:        os.Getenv("FIZZ_MAILER_WEB_APP_HOST_BASE_URL"),
+		PasswordResetBaseUrl:     os.Getenv("FIZZ_MAILER_PASSWORD_RESET_BASE_URL"),
 		MailgunDomain:            os.Getenv("FIZZ_MAILER_MAILGUN_DOMAIN"),
 		MailgunApiKey:            os.Getenv("FIZZ_MAILER_MAILGUN_API_KEY"),
 	}
