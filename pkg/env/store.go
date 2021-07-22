@@ -28,6 +28,7 @@ type storeEnv struct {
 	SubscribeApiUrl     string
 	SubscribeSuccessUrl string
 	SubscribeErrorUrl   string
+	PathPrefix          string
 }
 
 func (e storeEnv) Sanitize() { sanitize(reflect.ValueOf(e)) }
@@ -45,5 +46,6 @@ func newStoreEnv() *storeEnv {
 		SubscribeApiUrl:     os.Getenv("FIZZ_STORE_SUBSCRIBE_API_URL"),
 		SubscribeSuccessUrl: os.Getenv("FIZZ_STORE_SUBSCRIBE_SUCCESS_URL"),
 		SubscribeErrorUrl:   os.Getenv("FIZZ_STORE_SUBSCRIBE_ERROR_URL"),
+		PathPrefix:          os.Getenv("FIZZ_STORE_PATH_PREFIX"),
 	}
 }

@@ -24,6 +24,7 @@ type mailerEnv struct {
 	PasswordResetBaseUrl     string
 	MailgunDomain            string
 	MailgunApiKey            string
+	PathPrefix               string
 }
 
 func (e mailerEnv) Sanitize() { sanitize(reflect.ValueOf(e)) }
@@ -37,5 +38,6 @@ func newMailerEnv() *mailerEnv {
 		PasswordResetBaseUrl:     os.Getenv("FIZZ_MAILER_PASSWORD_RESET_BASE_URL"),
 		MailgunDomain:            os.Getenv("FIZZ_MAILER_MAILGUN_DOMAIN"),
 		MailgunApiKey:            os.Getenv("FIZZ_MAILER_MAILGUN_API_KEY"),
+		PathPrefix:               os.Getenv("FIZZ_MAILER_PATH_PREFIX"),
 	}
 }

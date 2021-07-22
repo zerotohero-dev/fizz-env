@@ -20,6 +20,7 @@ type questionsEnv struct {
 	Port              string
 	HoneybadgerApiKey string
 	DataPath          string
+	PathPrefix        string
 }
 
 func (e questionsEnv) Sanitize() { sanitize(reflect.ValueOf(e)) }
@@ -29,5 +30,6 @@ func newQuestionsEnv() *questionsEnv {
 		Port:              os.Getenv("FIZZ_QUESTIONS_SVC_PORT"),
 		HoneybadgerApiKey: os.Getenv("FIZZ_QUESTIONS_HONEYBADGER_API_KEY"),
 		DataPath:          os.Getenv("FIZZ_QUESTIONS_DATA_PATH"),
+		PathPrefix:        os.Getenv("FIZZ_QUESTIONS_PATH_PREFIX"),
 	}
 }

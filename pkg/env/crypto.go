@@ -20,6 +20,7 @@ import (
 
 type cryptoEnv struct {
 	Port              string
+	PathPrefix        string
 	HoneybadgerApiKey string
 	JwtKey            string
 	JwtExpiryHours    time.Duration
@@ -57,5 +58,6 @@ func newCryptoEnv() *cryptoEnv {
 		BcryptHashRounds:  bcryptHashRoundsNum,
 		AesPassphrase:     os.Getenv("FIZZ_CRYPTO_AES_PASSPHRASE"),
 		HoneybadgerApiKey: os.Getenv("FIZZ_CRYPTO_HONEYBADGER_API_KEY"),
+		PathPrefix:        os.Getenv("FIZZ_CRYPTO_PATH_PREFIX"),
 	}
 }
