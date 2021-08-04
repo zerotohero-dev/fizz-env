@@ -26,7 +26,7 @@ type idmEnv struct {
 	CryptoEndpointUrl  string
 	MailerEndpointUrl  string
 	PathPrefix         string
-	LaunchState		   string
+	LaunchState        string
 }
 
 func (e idmEnv) Sanitize() { sanitize(reflect.ValueOf(e)) }
@@ -42,6 +42,6 @@ func newIdmEnv() *idmEnv {
 		CryptoEndpointUrl:  os.Getenv("FIZZ_IDM_CRYPTO_ENDPOINT_URL"),
 		MailerEndpointUrl:  os.Getenv("FIZZ_IDM_MAILER_ENDPOINT_URL"),
 		PathPrefix:         os.Getenv("FIZZ_IDM_PATH_PREFIX"),
-		LaunchState: 		os.Getenv("FIZZ_IDM_LAUNCH_STATE"),
+		LaunchState:        os.Getenv("FIZZ_IDM_LAUNCH_STATE"),
 	}
 }
