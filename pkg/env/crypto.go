@@ -27,6 +27,7 @@ type cryptoEnv struct {
 	RandomByteLength  int
 	BcryptHashRounds  int
 	AesPassphrase     string
+	ServiceName       string
 }
 
 func (e cryptoEnv) Sanitize() { sanitize(reflect.ValueOf(e)) }
@@ -59,5 +60,6 @@ func newCryptoEnv() *cryptoEnv {
 		AesPassphrase:     os.Getenv("FIZZ_CRYPTO_AES_PASSPHRASE"),
 		HoneybadgerApiKey: os.Getenv("FIZZ_CRYPTO_HONEYBADGER_API_KEY"),
 		PathPrefix:        os.Getenv("FIZZ_CRYPTO_PATH_PREFIX"),
+		ServiceName:       os.Getenv("FIZZ_CRYPTO_SERVICE_NAME"),
 	}
 }
