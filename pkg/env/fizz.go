@@ -12,6 +12,7 @@
 package env
 
 type FizzEnv struct {
+	Spire      spireEnv
 	Crypto     cryptoEnv
 	Log        loggingEnv
 	Deployment deploymentEnv
@@ -21,12 +22,20 @@ type FizzEnv struct {
 	Store      storeEnv
 }
 
+type FizzIdmEnv struct {
+	Spire  spireEnv
+	Crypto cryptoEnv
+	Log    loggingEnv
+	Idm    idmEnv
+}
+
 func (e FizzEnv) IsDevelopment() bool {
 	return e.Deployment.Type == Development
 }
 
 func New() *FizzEnv {
 	return &FizzEnv{
+		Spire:      *newSpireEnv(),
 		Crypto:     *newCryptoEnv(),
 		Log:        *newLoggingEnv(),
 		Deployment: *newDeploymentEnv(),
@@ -34,5 +43,14 @@ func New() *FizzEnv {
 		Mailer:     *newMailerEnv(),
 		Questions:  *newQuestionsEnv(),
 		Store:      *newStoreEnv(),
+	}
+}
+
+func NewIdm() *FizzIdmEnv {
+	return &FizzIdmEnv{
+		Spire:  *newSpireEnv(),
+		Crypto: *newCryptoEnv(),
+		Log:    *newLoggingEnv(),
+		Idm:    *newIdmEnv(),
 	}
 }

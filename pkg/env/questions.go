@@ -21,6 +21,7 @@ type questionsEnv struct {
 	HoneybadgerApiKey string
 	DataPath          string
 	PathPrefix        string
+	ServiceName       string
 }
 
 func (e questionsEnv) Sanitize() { sanitize(reflect.ValueOf(e)) }
@@ -31,5 +32,6 @@ func newQuestionsEnv() *questionsEnv {
 		HoneybadgerApiKey: os.Getenv("FIZZ_QUESTIONS_HONEYBADGER_API_KEY"),
 		DataPath:          os.Getenv("FIZZ_QUESTIONS_DATA_PATH"),
 		PathPrefix:        os.Getenv("FIZZ_QUESTIONS_PATH_PREFIX"),
+		ServiceName:       os.Getenv("FIZZ_QUESTIONS_SERVICE_NAME"),
 	}
 }
