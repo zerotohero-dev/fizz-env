@@ -30,7 +30,7 @@ type idmEnv struct {
 	PathPrefix           string
 	ServiceName          string
 	JwtCookieExpiryHours time.Duration
-	LaunchState        string  
+	LaunchState          string
 }
 
 func (e idmEnv) Sanitize() { sanitize(reflect.ValueOf(e)) }
@@ -53,7 +53,7 @@ func newIdmEnv() *idmEnv {
 		MailerEndpointUrl:    os.Getenv("FIZZ_IDM_MAILER_ENDPOINT_URL"),
 		PathPrefix:           os.Getenv("FIZZ_IDM_PATH_PREFIX"),
 		ServiceName:          os.Getenv("FIZZ_IDM_SERVICE_NAME"),
-		JwtCookieExpiryHours: time.Duration(jwtCookieExpiryHoursNum),
+		JwtCookieExpiryHours: time.Duration(jwtCookieExpiryHoursNum) * time.Hour,
 		LaunchState:          os.Getenv("FIZZ_IDM_LAUNCH_STATE"),
 	}
 }

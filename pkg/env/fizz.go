@@ -29,6 +29,9 @@ type FizzIdmEnv struct {
 	Idm    idmEnv
 }
 
+type FizzLogEnv struct {
+}
+
 func (e FizzEnv) IsDevelopment() bool {
 	return e.Deployment.Type == Development
 }
@@ -43,14 +46,5 @@ func New() *FizzEnv {
 		Mailer:     *newMailerEnv(),
 		Questions:  *newQuestionsEnv(),
 		Store:      *newStoreEnv(),
-	}
-}
-
-func NewIdm() *FizzIdmEnv {
-	return &FizzIdmEnv{
-		Spire:  *newSpireEnv(),
-		Crypto: *newCryptoEnv(),
-		Log:    *newLoggingEnv(),
-		Idm:    *newIdmEnv(),
 	}
 }
