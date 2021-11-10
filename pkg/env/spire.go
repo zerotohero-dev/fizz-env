@@ -19,9 +19,12 @@ import (
 )
 
 type spireEnv struct {
-	SocketPath      string
-	ServerAddress   string
-	MtlsTimeoutSecs time.Duration
+	SocketPath          string
+	ServerAddress       string
+	MtlsTimeoutSecs     time.Duration
+	SpiffeAppNameCrypto string
+	SpiffeAppNameIdm    string
+	SpiffeAppNameMailer string
 }
 
 func (e spireEnv) Sanitize() { sanitize(reflect.ValueOf(e)) }
@@ -36,8 +39,13 @@ func newSpireEnv() *spireEnv {
 	}
 
 	return &spireEnv{
-		SocketPath:      os.Getenv("FIZZ_SPIRE_SOCKET_PATH"),
-		ServerAddress:   os.Getenv("FIZZ_SPIRE_SERVER_ADDRESS"),
+		SocketPath:    os.Getenv("FIZZ_SPIRE_SOCKET_PATH"),
+		ServerAddress: os.Getenv("FIZZ_SPIRE_SERVER_ADDRESS"),
+
+		SpiffeAppNameCrypto: os.Getenv("FIZZ_SPIFFE_APP_NAME_CRYPTO"),
+		SpiffeAppNameIdm:    os.Getenv("FIZZ_SPIFFE_APP_NAME_IDM"),
+		SpiffeAppNameMailer: os.Getenv("FIZZ_SPIFFE_APP_NAME_MAILER"),
+
 		MtlsTimeoutSecs: time.Duration(mtlsTimeoutSecsNum) * time.Second,
 	}
 }

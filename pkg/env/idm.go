@@ -31,6 +31,7 @@ type idmEnv struct {
 	ServiceName         string
 	JwtCookieExpiration time.Duration
 	LaunchState         string
+	MtlsServerAddress   string
 }
 
 func (e idmEnv) Sanitize() { sanitize(reflect.ValueOf(e)) }
@@ -55,5 +56,6 @@ func newIdmEnv() *idmEnv {
 		ServiceName:         os.Getenv("FIZZ_IDM_SERVICE_NAME"),
 		JwtCookieExpiration: time.Duration(jwtCookieExpiryHoursNum) * time.Hour,
 		LaunchState:         os.Getenv("FIZZ_IDM_LAUNCH_STATE"),
+		MtlsServerAddress:   os.Getenv("FIZZ_IDM_MTLS_SERVER_ADDRESS"),
 	}
 }
