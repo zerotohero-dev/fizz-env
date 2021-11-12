@@ -24,6 +24,7 @@ type spireEnv struct {
 	MtlsTimeout        time.Duration
 	AppPrefixFizz      string
 	AppNameFizzDefault string
+	AppTrustDomainFizz string
 }
 
 func (e spireEnv) Sanitize() { sanitize(reflect.ValueOf(e)) }
@@ -42,6 +43,7 @@ func newSpireEnv() *spireEnv {
 		ServerAddress:      os.Getenv("FIZZ_SPIRE_SERVER_ADDRESS"),
 		AppPrefixFizz:      os.Getenv("FIZZ_SPIRE_APP_PREFIX"),
 		AppNameFizzDefault: os.Getenv("FIZZ_SPIRE_DEFAULT_APP_NAME"),
+		AppTrustDomainFizz: os.Getenv("FIZZ_SPIRE_APP_TRUST_DOMAIN"),
 		MtlsTimeout:        time.Duration(mtlsTimeoutSecsNum) * time.Second,
 	}
 }
