@@ -23,7 +23,7 @@ type cryptoEnv struct {
 	PathPrefix        string
 	HoneybadgerApiKey string
 	JwtKey            string
-	JwtExpiryHours    time.Duration
+	JwtExpiration     time.Duration
 	RandomByteLength  int
 	BcryptHashRounds  int
 	AesPassphrase     string
@@ -55,7 +55,7 @@ func newCryptoEnv() *cryptoEnv {
 	return &cryptoEnv{
 		Port:              os.Getenv("FIZZ_CRYPTO_SVC_PORT"),
 		JwtKey:            os.Getenv("FIZZ_CRYPTO_JWT_KEY"),
-		JwtExpiryHours:    time.Duration(jwtExpiryHoursNum),
+		JwtExpiration:     time.Duration(jwtExpiryHoursNum) * time.Hour,
 		RandomByteLength:  randomByteLengthNum,
 		BcryptHashRounds:  bcryptHashRoundsNum,
 		AesPassphrase:     os.Getenv("FIZZ_CRYPTO_AES_PASSPHRASE"),
