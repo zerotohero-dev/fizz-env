@@ -26,7 +26,6 @@ type mailerEnv struct {
 	MailgunApiKey            string
 	PathPrefix               string
 	ServiceName              string
-	MtlsServerAddress        string
 }
 
 func (e mailerEnv) Sanitize() { sanitize(reflect.ValueOf(e)) }
@@ -42,6 +41,5 @@ func newMailerEnv() *mailerEnv {
 		MailgunApiKey:            os.Getenv("FIZZ_MAILER_MAILGUN_API_KEY"),
 		PathPrefix:               os.Getenv("FIZZ_MAILER_PATH_PREFIX"),
 		ServiceName:              os.Getenv("FIZZ_MAILER_SERVICE_NAME"),
-		MtlsServerAddress:        os.Getenv("FIZZ_MAILER_MTLS_SERVER_ADDRESS"),
 	}
 }

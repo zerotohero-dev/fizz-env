@@ -39,7 +39,7 @@ func newSpireEnv() *spireEnv {
 	}
 
 	return &spireEnv{
-		SocketPath:         os.Getenv("FIZZ_SPIRE_SOCKET_PATH"),
+		SocketPath:         os.Getenv("SPIFFE_ENDPOINT_SOCKET"),
 		ServerAddress:      os.Getenv("FIZZ_SPIRE_SERVER_ADDRESS"),
 		AppPrefixFizz:      os.Getenv("FIZZ_SPIRE_APP_PREFIX"),
 		AppNameFizzDefault: os.Getenv("FIZZ_SPIRE_DEFAULT_APP_NAME"),

@@ -28,7 +28,6 @@ type cryptoEnv struct {
 	BcryptHashRounds  int
 	AesPassphrase     string
 	ServiceName       string
-	MtlsServerAddress string
 }
 
 func (e cryptoEnv) Sanitize() { sanitize(reflect.ValueOf(e)) }
@@ -62,6 +61,5 @@ func newCryptoEnv() *cryptoEnv {
 		HoneybadgerApiKey: os.Getenv("FIZZ_CRYPTO_HONEYBADGER_API_KEY"),
 		PathPrefix:        os.Getenv("FIZZ_CRYPTO_PATH_PREFIX"),
 		ServiceName:       os.Getenv("FIZZ_CRYPTO_SERVICE_NAME"),
-		MtlsServerAddress: os.Getenv("FIZZ_CRYPTO_MTLS_SERVER_ADDRESS"),
 	}
 }

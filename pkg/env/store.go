@@ -19,8 +19,6 @@ import (
 type storeEnv struct {
 	Port                string
 	HoneybadgerApiKey   string
-	CryptoEndpointUrl   string
-	IdmEndpointUrl      string
 	UsersTableName      string
 	PlansTableName      string
 	StripePrivateKey    string
@@ -38,8 +36,6 @@ func newStoreEnv() *storeEnv {
 	return &storeEnv{
 		Port:                os.Getenv("FIZZ_STORE_SVC_PORT"),
 		HoneybadgerApiKey:   os.Getenv("FIZZ_STORE_HONEYBADGER_API_KEY"),
-		CryptoEndpointUrl:   os.Getenv("FIZZ_STORE_CRYPTO_ENDPOINT_URL"),
-		IdmEndpointUrl:      os.Getenv("FIZZ_STORE_IDM_ENDPOINT_URL"),
 		UsersTableName:      os.Getenv("FIZZ_STORE_USERS_TABLE_NAME"),
 		PlansTableName:      os.Getenv("FIZZ_STORE_PLANS_TABLE_NAME"),
 		StripePrivateKey:    os.Getenv("FIZZ_STORE_STRIPE_PRIVATE_KEY"),
